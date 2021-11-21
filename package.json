@@ -1,11 +1,16 @@
 {
   "name": "number-to-words-kg",
-  "version": "1.7.0",
+  "version": "1.7.1",
   "description": "Convert a number to words on kyrgyz language.",
   "main": "./src",
   "scripts": {
     "test": "jest"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/azattix/number-to-words-kg"
+  },
+  "homepage": "https://github.com/azattix/number-to-words-kg",
   "keywords": [
     "convert",
     "number",
