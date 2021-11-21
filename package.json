@@ -1,14 +1,22 @@
 {
   "name": "number-to-words-kg",
-  "version": "1.6.2",
-  "description": "",
-  "main": "app.js",
+  "version": "1.6.3",
+  "description": "Convert a number to words on kyrgyz language.",
+  "main": "./src",
   "scripts": {
     "test": "jest"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "convert",
+    "number",
+    "to",
+    "words",
+    "kyrgyz",
+    "kgs",
+    "kg"
+  ],
+  "author": "Azamat Soodaev",
+  "license": "MIT",
   "devDependencies": {
     "jest": "^27.3.1"
   }
