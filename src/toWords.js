@@ -28,9 +28,8 @@ var currencies = {
 };
 
 /**
- * Converts an integer into words.
- * If number is decimal, the decimals will be removed.
- * @example toWords(12) => 'он эки'
+ * Converts a number between -9007199254740991 and +9007199254740991 into words.
+ * @example toWords(100) => 'жүз сом 00 тыйын'
  * @param {number|string} number
  * @returns {string}
  */
@@ -51,11 +50,17 @@ function toWords(number, options) {
     }
     words = generateWords(num);
 
+    // append currency
     if (options && typeof options.currency === 'string') {
         if (options.currency in currencies) {
-            words += ' ' + currencies[options.currency] + ' ' + decimalPart + ' тыйын';
+            words += ' ' + currencies[options.currency];
         }
+    } else {
+        // if no options, append default currency
+        words += ' ' + currencies["KGS"];
     }
+
+    words += ' ' + decimalPart + ' тыйын';
 
     return words;
 }
@@ -66,7 +71,12 @@ function generateWords(number) {
 
     // We’re done
     if (number === 0) {
-        return !words ? 'ноль' : words.join(' ').replace(/,$/, '');
+        var output = !words ? 'ноль' : words.join(' ').replace(/,$/, '');
+        // check if number is negative zero
+        if (1/+0 !== 1/number) {
+            return 'минус ' + output;
+        }
+        return output;
     }
     // First run
     if (!words) {

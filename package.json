@@ -1,6 +1,6 @@
 {
   "name": "number-to-words-kg",
-  "version": "1.6.4",
+  "version": "1.6.5",
   "description": "Convert a number to words on kyrgyz language.",
   "main": "./src",
   "scripts": {
