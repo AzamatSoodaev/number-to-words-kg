@@ -2,6 +2,7 @@
 
 var isFinite = require('./isFinite');
 var isSafeNumber = require('./isSafeNumber');
+var getDecimalPart = require('./getDecimalPart');
 
 var TEN = 10;
 var ONE_HUNDRED = 100;
@@ -36,6 +37,7 @@ var currencies = {
 function toWords(number, options) {
     var words;
     var num = parseInt(number, 10);
+    var decimalPart = getDecimalPart(number);
 
     if (!isFinite(num)) {
         throw new TypeError(
@@ -51,7 +53,7 @@ function toWords(number, options) {
 
     if (options && typeof options.currency === 'string') {
         if (options.currency in currencies) {
-            words += ' ' + currencies[options.currency];
+            words += ' ' + currencies[options.currency] + ' ' + decimalPart + ' тыйын';
         }
     }
 
