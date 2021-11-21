@@ -10,4 +10,5 @@ test('Get decimal part of a number', function () {
     expect(getDecimalPart(10.05)).toBe('05');
     expect(getDecimalPart(11.111)).toBe('11');
     expect(getDecimalPart('11.11')).toBe('11');
+    expect(getDecimalPart('-05.11')).toBe('11');
 });
