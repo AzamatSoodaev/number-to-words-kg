@@ -3,6 +3,7 @@
 var isFinite = require('./isFinite');
 var isSafeNumber = require('./isSafeNumber');
 var getDecimalPart = require('./getDecimalPart');
+var capitalizeFirstLetter = require('./capitalizeFirstLetter');
 
 var TEN = 10;
 var ONE_HUNDRED = 100;
@@ -76,7 +77,7 @@ function toWords(number, options = defaultOptions) {
         words += ' ' + currencies['KGS'].integer + ' ' + decimalPart + ' ' + currencies['KGS'].fractional;
     }
 
-    return words;
+    return capitalizeFirstLetter(words);
 }
 
 function generateWords(number) {
