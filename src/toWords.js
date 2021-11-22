@@ -22,9 +22,22 @@ var TENTHS_LESS_THAN_HUNDRED = [
 ];
 
 var currencies = {
-    'USD': 'доллар',
-    'RUB': 'рубль',
-    'KGS': 'сом'
+    'USD':  {
+		integer: 'доллар',
+		fractional: 'цент',
+	},
+    'RUB': {
+		integer: 'рубль',
+		fractional: 'тыйын',
+	},
+    'KGS': {
+		integer: 'сом',
+		fractional: 'тыйын',
+	},
+};
+
+var defaultOptions = {
+	currency: 'KGS',
 };
 
 /**
@@ -33,7 +46,7 @@ var currencies = {
  * @param {number|string} number
  * @returns {string}
  */
-function toWords(number, options) {
+function toWords(number, options = defaultOptions) {
     var words;
     var num = parseInt(number, 10);
     var decimalPart = getDecimalPart(number);
@@ -51,16 +64,17 @@ function toWords(number, options) {
     words = generateWords(num);
 
     // append currency
-    if (options && typeof options.currency === 'string') {
+    if (options && typeof options === 'object' && typeof options.currency === 'string') {
         if (options.currency in currencies) {
-            words += ' ' + currencies[options.currency];
-        }
+            words += ' ' + currencies[options.currency].integer + ' ' + decimalPart + ' ' + currencies[options.currency].fractional;
+        } else {
+			// if no options, append default currency
+			words += ' ' + currencies['KGS'].integer + ' ' + decimalPart + ' ' + currencies['KGS'].fractional;
+		}
     } else {
         // if no options, append default currency
-        words += ' ' + currencies["KGS"];
+        words += ' ' + currencies['KGS'].integer + ' ' + decimalPart + ' ' + currencies['KGS'].fractional;
     }
-
-    words += ' ' + decimalPart + ' тыйын';
 
     return words;
 }
