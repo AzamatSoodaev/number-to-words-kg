@@ -8,11 +8,11 @@ Convert a number to words on kyrgyz language.
 
 ## API
 
-`toWords(number, [options])`
+#### `toWords(number, [options])`
 
 Converts a number between `-9007199254740991` and `+9007199254740991` into words.
 
-```
+```js
 var converter = require('number-to-words-kg');
 
 converter.toWords(13); // => "он үч сом 00 тыйын"
@@ -28,6 +28,6 @@ converter.toWords(9007199254740991); // => тогуз квадриллион ж�
 
 // Various currencies:
 converter.toWords(123.5, { currency: 'KGS' }); // => "бир жүз жыйырма үч сом 50 тыйын"
-converter.toWords(0.5, { currency: 'RUB' }); // => "отуз төрт рубль 50 тыйын"
+converter.toWords(0.5, { currency: 'RUB' }); // => "ноль рубль 50 тыйын"
 converter.toWords(34.5, { currency: 'USD' }); // => "отуз төрт доллар 50 тыйын"
 ```
