@@ -2,9 +2,7 @@
 
 var isSafeNumber = require('./isSafeNumber');
 
-test('Should return false value', function () {
-    expect(isSafeNumber(Infinity)).toBe(false);
-    expect(isSafeNumber(-Infinity)).toBe(false);
+test('not a number type', function () {
     expect(isSafeNumber(NaN)).toBe(false);
     expect(isSafeNumber(undefined)).toBe(false);
     expect(isSafeNumber(null)).toBe(false);
@@ -12,13 +10,16 @@ test('Should return false value', function () {
     expect(isSafeNumber(true)).toBe(false);
     expect(isSafeNumber(false)).toBe(false);
     expect(isSafeNumber({})).toBe(false);
-    expect(isSafeNumber()).toBe(false);
-    expect(isSafeNumber(9007199254740992)).toBe(false);
-    expect(isSafeNumber(-9007199254740992)).toBe(false);
 });
 
-test('Should return true value', function () {
-    expect(isSafeNumber(9007199254740991)).toBe(true);
-    expect(isSafeNumber(-9007199254740991)).toBe(true);
+test('large numbers', function () {
+    expect(isSafeNumber(Infinity)).toBe(false);
+    expect(isSafeNumber(Math.pow(2, 53))).toBe(false);
+    expect(isSafeNumber(Math.pow(2, 53) - 1)).toBe(true);
+});
+
+test('decimal', function () {
+    expect(isSafeNumber(3.0)).toBe(true);
+    expect(isSafeNumber(3.3)).toBe(true);
 });
 
