@@ -18,7 +18,13 @@ test('Convert number to words', function () {
 
 test('Convert number to words with currency', function () {
     expect(toWords('120', { currency: "KGS" })).toBe('Бир жүз жыйырма сом 00 тыйын');
-    expect(toWords('121.124', { currency: "USD" })).toBe('Бир жүз жыйырма бир доллар 12 цент');
+    expect(toWords('121.124', {
+        currency: "USD",
+        showCurrency: {
+            integer: true,
+            fractional: true
+        }
+    })).toBe('Бир жүз жыйырма бир доллар 12 цент');
     expect(toWords(12, { currency: "RUB" })).toBe('Он эки рубль 00 тыйын');
     expect(toWords(12, { currency: "RUf" })).toBe('Он эки сом 00 тыйын');
 });
