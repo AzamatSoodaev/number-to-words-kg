@@ -39,6 +39,10 @@ var currencies = {
 
 var defaultOptions = {
     currency: 'KGS',
+    showCurrency: {
+        integer: true,
+        fractional: true
+    }
 };
 
 /**
@@ -47,10 +51,11 @@ var defaultOptions = {
  * @param {number|string} number
  * @returns {string}
  */
-function toWords(number, options = defaultOptions) {
+function toWords(number, options) {
     var words;
     var num = parseInt(number, 10);
     var decimalPart = getDecimalPart(number);
+    var currentCurrency = defaultOptions.currency;
 
     if (!isFinite(num)) {
         throw new TypeError(
@@ -64,17 +69,27 @@ function toWords(number, options = defaultOptions) {
     }
     words = generateWords(num);
 
-    // append currency
-    if (options && typeof options === 'object' && typeof options.currency === 'string') {
+    // copy default options
+    if (!options || typeof options !== 'object') options = defaultOptions;
+    if (!options.hasOwnProperty('currency')) options.currency = defaultOptions.currency;
+    if (!options.hasOwnProperty('showCurrency')) options.showCurrency = defaultOptions.showCurrency;
+    if (!options.showCurrency.hasOwnProperty('integer')) options.showCurrency.integer = defaultOptions.showCurrency.integer;
+    if (!options.showCurrency.hasOwnProperty('fractional')) options.showCurrency.fractional = defaultOptions.showCurrency.fractional;
+
+    // currency
+    if (typeof options.currency === 'string') {
         if (options.currency in currencies) {
-            words += ' ' + currencies[options.currency].integer + ' ' + decimalPart + ' ' + currencies[options.currency].fractional;
-        } else {
-            // if no options, append default currency
-            words += ' ' + currencies['KGS'].integer + ' ' + decimalPart + ' ' + currencies['KGS'].fractional;
+            currentCurrency = options.currency;
         }
-    } else {
-        // if no options, append default currency
-        words += ' ' + currencies['KGS'].integer + ' ' + decimalPart + ' ' + currencies['KGS'].fractional;
+    }
+
+    // show currency
+    if (options.showCurrency.integer === true) {
+        words += ' ' + currencies[currentCurrency].integer;
+    }
+
+    if (options.showCurrency.fractional === true) {
+        words += ' ' + decimalPart + ' ' + currencies[currentCurrency].fractional;
     }
 
     return capitalizeFirstLetter(words);

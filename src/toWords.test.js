@@ -22,3 +22,17 @@ test('Convert number to words with currency', function () {
     expect(toWords(12, { currency: "RUB" })).toBe('Он эки рубль 00 тыйын');
     expect(toWords(12, { currency: "RUf" })).toBe('Он эки сом 00 тыйын');
 });
+
+// test('Convert minus sign to word', function () {
+//     expect(toWords('-120.01', { convertMinusSignToWord: false })).toBe('- бир жүз жыйырма сом 01 тыйын');
+// });
+
+test('Show currency', function () {
+    expect(toWords('120.01', { showCurrency: {} })).toBe('Бир жүз жыйырма сом 01 тыйын');
+    expect(toWords('120.01', { showCurrency: { integer: false, } })).toBe('Бир жүз жыйырма 01 тыйын');
+    expect(toWords('120.01', { showCurrency: { fractional: false, } })).toBe('Бир жүз жыйырма сом');
+    expect(toWords('120.01', { showCurrency: { integer: true, fractional: false } })).toBe('Бир жүз жыйырма сом');
+    expect(toWords('120.01', { showCurrency: { integer: false, fractional: true } })).toBe('Бир жүз жыйырма 01 тыйын');
+    expect(toWords('120.01', { showCurrency: { integer: false, fractional: false } })).toBe('Бир жүз жыйырма');
+    expect(toWords('120.01', { showCurrency: { integer: true, fractional: true } })).toBe('Бир жүз жыйырма сом 01 тыйын');
+});
