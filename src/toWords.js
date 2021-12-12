@@ -23,22 +23,22 @@ var TENTHS_LESS_THAN_HUNDRED = [
 ];
 
 var currencies = {
-    'USD':  {
-		integer: 'доллар',
-		fractional: 'цент',
-	},
+    'USD': {
+        integer: 'доллар',
+        fractional: 'цент',
+    },
     'RUB': {
-		integer: 'рубль',
-		fractional: 'тыйын',
-	},
+        integer: 'рубль',
+        fractional: 'тыйын',
+    },
     'KGS': {
-		integer: 'сом',
-		fractional: 'тыйын',
-	},
+        integer: 'сом',
+        fractional: 'тыйын',
+    },
 };
 
 var defaultOptions = {
-	currency: 'KGS',
+    currency: 'KGS',
 };
 
 /**
@@ -69,9 +69,9 @@ function toWords(number, options = defaultOptions) {
         if (options.currency in currencies) {
             words += ' ' + currencies[options.currency].integer + ' ' + decimalPart + ' ' + currencies[options.currency].fractional;
         } else {
-			// if no options, append default currency
-			words += ' ' + currencies['KGS'].integer + ' ' + decimalPart + ' ' + currencies['KGS'].fractional;
-		}
+            // if no options, append default currency
+            words += ' ' + currencies['KGS'].integer + ' ' + decimalPart + ' ' + currencies['KGS'].fractional;
+        }
     } else {
         // if no options, append default currency
         words += ' ' + currencies['KGS'].integer + ' ' + decimalPart + ' ' + currencies['KGS'].fractional;
@@ -88,7 +88,7 @@ function generateWords(number) {
     if (number === 0) {
         var output = !words ? 'ноль' : words.join(' ').replace(/,$/, '');
         // check if number is negative zero
-        if (1/+0 !== 1/number) {
+        if (1 / +0 !== 1 / number) {
             return 'минус ' + output;
         }
         return output;
