@@ -29,5 +29,5 @@ converter.toWords(9007199254740991); // => Тогуз квадриллион ж�
 // Various currencies:
 converter.toWords(123.5, { currency: 'KGS' }); // => "Бир жүз жыйырма үч сом 50 тыйын"
 converter.toWords(0.5, { currency: 'RUB' }); // => "Ноль рубль 50 тыйын"
-converter.toWords(34.5, { currency: 'USD' }); // => "Отуз төрт доллар 50 тыйын"
+converter.toWords(34.5, { currency: 'USD' }); // => "Отуз төрт доллар 50 цент"
 ```
