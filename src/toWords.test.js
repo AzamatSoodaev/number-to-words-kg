@@ -20,6 +20,10 @@ test('Convert number to words with currency', function () {
     expect(toWords('120', { currency: "KGS" })).toBe('Бир жүз жыйырма сом 00 тыйын');
     expect(toWords('121.124', {
         currency: "USD",
+		showNumberParts: {
+			integer: true,
+			fractional: true
+		},
         showCurrency: {
             integer: true,
             fractional: true
@@ -36,9 +40,31 @@ test('Convert number to words with currency', function () {
 test('Show currency', function () {
     expect(toWords('120.01', { showCurrency: {} })).toBe('Бир жүз жыйырма сом 01 тыйын');
     expect(toWords('120.01', { showCurrency: { integer: false, } })).toBe('Бир жүз жыйырма 01 тыйын');
-    expect(toWords('120.01', { showCurrency: { fractional: false, } })).toBe('Бир жүз жыйырма сом');
-    expect(toWords('120.01', { showCurrency: { integer: true, fractional: false } })).toBe('Бир жүз жыйырма сом');
+    expect(toWords('120.01', { showCurrency: { fractional: false, } })).toBe('Бир жүз жыйырма сом 01');
+    expect(toWords('120.01', { showCurrency: { integer: true, fractional: false } })).toBe('Бир жүз жыйырма сом 01');
     expect(toWords('120.01', { showCurrency: { integer: false, fractional: true } })).toBe('Бир жүз жыйырма 01 тыйын');
-    expect(toWords('120.01', { showCurrency: { integer: false, fractional: false } })).toBe('Бир жүз жыйырма');
+    expect(toWords('120.01', { showCurrency: { integer: false, fractional: false } })).toBe('Бир жүз жыйырма 01');
     expect(toWords('120.01', { showCurrency: { integer: true, fractional: true } })).toBe('Бир жүз жыйырма сом 01 тыйын');
+});
+
+test('Show number parts', function () {
+    expect(toWords('120.01', { showNumberParts: {} })).toBe('Бир жүз жыйырма сом 01 тыйын');
+    expect(toWords('120.01', { showNumberParts: { integer: false, } })).toBe('01 тыйын');
+    expect(toWords('120.01', { showNumberParts: { fractional: false, } })).toBe('Бир жүз жыйырма сом');
+    expect(toWords('120.01', { showNumberParts: { integer: true, fractional: false } })).toBe('Бир жүз жыйырма сом');
+    expect(toWords('120.01', { showNumberParts: { integer: false, fractional: true } })).toBe('01 тыйын');
+    expect(toWords('120.01', { showNumberParts: { integer: false, fractional: false } })).toBe('');
+    expect(toWords('120.01', { showNumberParts: { integer: true, fractional: true } })).toBe('Бир жүз жыйырма сом 01 тыйын');
+});
+
+test('Show number parts and currency', function () {
+    expect(toWords('120.01', {
+		showNumberParts: { integer: false, },
+		showCurrency: { fractional: false, }
+	})).toBe('01');
+
+	expect(toWords('120.01', {
+		showNumberParts: { fractional: false, },
+		showCurrency: { integer: false, }
+	})).toBe('Бир жүз жыйырма');
 });
