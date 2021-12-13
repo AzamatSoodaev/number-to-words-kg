@@ -88,8 +88,10 @@ function toWords(number, options) {
         words += ' ' + currencies[currentCurrency].integer;
     }
 
+	words += ' ' + decimalPart;
+
     if (options.showCurrency.fractional === true) {
-        words += ' ' + decimalPart + ' ' + currencies[currentCurrency].fractional;
+        words += ' ' + currencies[currentCurrency].fractional;
     }
 
     return capitalizeFirstLetter(words);

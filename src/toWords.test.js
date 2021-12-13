@@ -36,9 +36,9 @@ test('Convert number to words with currency', function () {
 test('Show currency', function () {
     expect(toWords('120.01', { showCurrency: {} })).toBe('Бир жүз жыйырма сом 01 тыйын');
     expect(toWords('120.01', { showCurrency: { integer: false, } })).toBe('Бир жүз жыйырма 01 тыйын');
-    expect(toWords('120.01', { showCurrency: { fractional: false, } })).toBe('Бир жүз жыйырма сом');
-    expect(toWords('120.01', { showCurrency: { integer: true, fractional: false } })).toBe('Бир жүз жыйырма сом');
+    expect(toWords('120.01', { showCurrency: { fractional: false, } })).toBe('Бир жүз жыйырма сом 01');
+    expect(toWords('120.01', { showCurrency: { integer: true, fractional: false } })).toBe('Бир жүз жыйырма сом 01');
     expect(toWords('120.01', { showCurrency: { integer: false, fractional: true } })).toBe('Бир жүз жыйырма 01 тыйын');
-    expect(toWords('120.01', { showCurrency: { integer: false, fractional: false } })).toBe('Бир жүз жыйырма');
+    expect(toWords('120.01', { showCurrency: { integer: false, fractional: false } })).toBe('Бир жүз жыйырма 01');
     expect(toWords('120.01', { showCurrency: { integer: true, fractional: true } })).toBe('Бир жүз жыйырма сом 01 тыйын');
 });
