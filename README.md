@@ -3,7 +3,13 @@ Convert a number to words on kyrgyz language.
 
 ## Install
 
+### Install with npm:
+
 ```npm i number-to-words-kg```
+
+### Install with yarn:
+
+```yarn add number-to-words-kg```
 
 ## Usage
 
