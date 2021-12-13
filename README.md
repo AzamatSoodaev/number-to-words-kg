@@ -1,5 +1,5 @@
 # number-to-words-kg
-Convert a number to words on kyrgyz language.
+Convert a number to words in the Kyrgyz language.
 
 ## Install
 
