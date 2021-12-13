@@ -3,6 +3,7 @@
 var isFinite = require('./isFinite');
 var isSafeNumber = require('./isSafeNumber');
 var getDecimalPart = require('./getDecimalPart');
+var copyPropsIfNotExist = require('./copyPropsIfNotExist');
 var capitalizeFirstLetter = require('./capitalizeFirstLetter');
 
 var TEN = 10;
@@ -55,7 +56,7 @@ var defaultOptions = {
  * @param {number|string} number
  * @returns {string}
  */
-function toWords(number, options) {
+function toWords(number, options = {}) {
     var words = '';
     var num = parseInt(number, 10);
     var decimalPart = getDecimalPart(number);
@@ -72,17 +73,7 @@ function toWords(number, options) {
         );
     }
 
-    // copy default options
-    if (!options || typeof options !== 'object') options = defaultOptions;
-    if (!options.hasOwnProperty('currency')) options.currency = defaultOptions.currency;
-
-	if (!options.hasOwnProperty('showCurrency')) options.showCurrency = defaultOptions.showCurrency;
-    if (!options.showCurrency.hasOwnProperty('integer')) options.showCurrency.integer = defaultOptions.showCurrency.integer;
-    if (!options.showCurrency.hasOwnProperty('fractional')) options.showCurrency.fractional = defaultOptions.showCurrency.fractional;
-
-	if (!options.hasOwnProperty('showNumberParts')) options.showNumberParts = defaultOptions.showNumberParts;
-	if (!options.showNumberParts.hasOwnProperty('integer')) options.showNumberParts.integer = defaultOptions.showNumberParts.integer;
-    if (!options.showNumberParts.hasOwnProperty('fractional')) options.showNumberParts.fractional = defaultOptions.showNumberParts.fractional;
+	copyPropsIfNotExist(options, defaultOptions);
 
     // currency
     if (typeof options.currency === 'string') {
