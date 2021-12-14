@@ -68,3 +68,43 @@ test('Show number parts and currency', function () {
 		showCurrency: { integer: false, }
 	})).toBe('Бир жүз жыйырма');
 });
+
+test('Convert Number To Words', function () {
+    expect(toWords('120.01', { convertNumberToWords: { fractional: false } })).toBe('Бир жүз жыйырма сом 01 тыйын');
+    expect(toWords('-120.01', { convertNumberToWords: { integer: false } })).toBe('Минус 120 сом 01 тыйын');
+});
+
+test('Convert Minus Sign To Word', function () {
+	expect(toWords('-120.01', { convertMinusSignToWord: false })).toBe('- бир жүз жыйырма сом 01 тыйын');
+
+    expect(toWords('-120.01', {
+		convertNumberToWords: { integer: false },
+		convertMinusSignToWord: false
+	})).toBe('- 120 сом 01 тыйын');
+
+	expect(toWords('-120.01', {
+		convertNumberToWords: { integer: false },
+		convertMinusSignToWord: false
+	})).toBe('- 120 сом 01 тыйын');
+});
+
+test('Convert Minus Sign To Word', function () {
+	expect(toWords('-120.01', {
+		convertNumberToWords: { integer: false, fractional: true },
+		convertMinusSignToWord: false
+	})).toBe('- 120 сом бир тыйын');
+
+	expect(toWords('-120.111', {
+		convertNumberToWords: { integer: false, fractional: true },
+		convertMinusSignToWord: false
+	})).toBe('- 120 сом он бир тыйын');
+
+	expect(toWords('-120.111', {
+		convertNumberToWords: { integer: true, fractional: true },
+		convertMinusSignToWord: false
+	})).toBe('- бир жүз жыйырма сом он бир тыйын');
+
+	expect(toWords('-120.111', {
+		convertNumberToWords: { integer: true, fractional: true },
+	})).toBe('Минус бир жүз жыйырма сом он бир тыйын');
+});

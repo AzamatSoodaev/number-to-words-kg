@@ -40,6 +40,7 @@ var currencies = {
 
 var defaultOptions = {
     currency: 'KGS',
+	convertMinusSignToWord: true,
 	showNumberParts: {
 		integer: true,
         fractional: true
@@ -48,6 +49,10 @@ var defaultOptions = {
         integer: true,
         fractional: true
     },
+	convertNumberToWords: {
+		integer: true,
+        fractional: false
+	}
 };
 
 /**
@@ -57,7 +62,7 @@ var defaultOptions = {
  * @returns {string}
  */
 function toWords(number, options = {}) {
-    var words = '';
+    var words = [];
     var num = parseInt(number, 10);
     var decimalPart = getDecimalPart(number);
     var currentCurrency = defaultOptions.currency;
@@ -84,23 +89,40 @@ function toWords(number, options = {}) {
 
 	// integer part
 	if (options.showNumberParts.integer === true) {
-		words = generateWords(num);
+		// If negative, prepend “minus”
+		if (num < 0 || (num === 0 && (1 / +0 !== 1 / num))) { // or if negative zero
+			if (options.convertMinusSignToWord === true) {
+				words.push('Минус');
+			} else {
+				words.push('-');
+			}
+		}
+
+		if (options.convertNumberToWords.integer === true) {
+			words.push(generateWords(Math.abs(num)));
+		} else {
+			words.push(Math.abs(num));
+		}
 
 		if (options.showCurrency.integer === true) {
-			words += ' ' + currencies[currentCurrency].integer;
+			words.push(currencies[currentCurrency].integer);
 		}
 	}
 
 	// fractional part
 	if (options.showNumberParts.fractional === true) {
-		words += ' ' + decimalPart;
+		if (options.convertNumberToWords.fractional === true) {
+			words.push(generateWords(parseInt(decimalPart, 10)));
+		} else {
+			words.push(decimalPart);
+		}
 
 		if (options.showCurrency.fractional === true) {
-			words += ' ' + currencies[currentCurrency].fractional;
+			words.push(currencies[currentCurrency].fractional);
 		}
 	}
 
-    return capitalizeFirstLetter(words).trim();
+    return capitalizeFirstLetter(words.join(' '));
 }
 
 function generateWords(number) {
@@ -110,20 +132,11 @@ function generateWords(number) {
     // We’re done
     if (number === 0) {
         var output = !words ? 'ноль' : words.join(' ').replace(/,$/, '');
-        // check if number is negative zero
-        if (1 / +0 !== 1 / number) {
-            return 'минус ' + output;
-        }
         return output;
     }
     // First run
     if (!words) {
         words = [];
-    }
-    // If negative, prepend “minus”
-    if (number < 0) {
-        words.push('минус');
-        number = Math.abs(number);
     }
 
     if (number < TEN) {
