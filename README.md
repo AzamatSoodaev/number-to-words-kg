@@ -32,6 +32,7 @@ converter.toWords(123.5, { currency: 'KGS' }); // => "Бир жүз жыйырм
 converter.toWords(0.5, { currency: 'RUB' }); // => "Ноль рубль 50 тыйын"
 converter.toWords(34.5, {
     currency: 'USD',
+	convertMinusSignToWord: true,
 	showNumberParts: {
 		integer: true,
         fractional: true
@@ -39,7 +40,11 @@ converter.toWords(34.5, {
     showCurrency: {
         integer: true,
         fractional: true
-    }
+    },
+	convertNumberToWords: {
+		integer: true,
+        fractional: false
+	}
 }); // => "Отуз төрт доллар 50 цент"
 ```
 
@@ -61,6 +66,7 @@ Converts a number into words.
 ```js
 {
     currency: 'KGS',
+	convertMinusSignToWord: true,
 	showNumberParts: {
 		integer: true,
         fractional: true
@@ -69,5 +75,9 @@ Converts a number into words.
         integer: true,
         fractional: true
     },
+	convertNumberToWords: {
+		integer: true,
+        fractional: false
+	}
 }
 ```
