@@ -3,9 +3,7 @@
   "version": "1.11.1",
   "description": "Convert a number to words on kyrgyz language.",
   "main": "./src",
-  "scripts": {
-    "test": "jest"
-  },
+  "scripts": {},
   "repository": {
     "type": "git",
     "url": "https://github.com/azattix/number-to-words-kg"
@@ -21,8 +19,5 @@
     "kg"
   ],
   "author": "Azamat Soodaev",
-  "license": "MIT",
-  "devDependencies": {
-    "jest": "^27.3.1"
-  }
+  "license": "MIT"
 }
