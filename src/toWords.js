@@ -87,17 +87,17 @@ function toWords(number, options = {}) {
         }
     }
 
+    // If negative, prepend “minus”
+    if (num < 0 || (num === 0 && (1 / +0 !== 1 / num))) { // or if negative zero
+        if (options.convertMinusSignToWord === true) {
+            words.push('Минус');
+        } else {
+            words.push('-');
+        }
+    }
+
 	// integer part
 	if (options.showNumberParts.integer === true) {
-		// If negative, prepend “minus”
-		if (num < 0 || (num === 0 && (1 / +0 !== 1 / num))) { // or if negative zero
-			if (options.convertMinusSignToWord === true) {
-				words.push('Минус');
-			} else {
-				words.push('-');
-			}
-		}
-
 		if (options.convertNumberToWords.integer === true) {
 			words.push(generateWords(Math.abs(num)));
 		} else {
