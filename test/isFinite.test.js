@@ -1,6 +1,6 @@
 'use strict';
 
-var isFinite = require('./isFinite');
+var isFinite = require('./../src/isFinite');
 
 test('Should return false value', function () {
     expect(isFinite(Infinity)).toBe(false);

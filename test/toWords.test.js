@@ -1,6 +1,6 @@
 'use strict';
 
-var toWords = require('./toWords');
+var toWords = require('./../src/toWords');
 
 test('Convert number to words', function () {
     expect(toWords(0)).toBe('Ноль сом 00 тыйын');

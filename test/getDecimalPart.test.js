@@ -1,6 +1,6 @@
 'use strict';
 
-var getDecimalPart = require('./getDecimalPart');
+var getDecimalPart = require('./../src/getDecimalPart');
 
 test('Get decimal part of a number', function () {
     expect(getDecimalPart(10)).toBe('00');

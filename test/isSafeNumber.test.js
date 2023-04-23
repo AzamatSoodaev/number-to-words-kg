@@ -1,6 +1,6 @@
 'use strict';
 
-var isSafeNumber = require('./isSafeNumber');
+var isSafeNumber = require('./../src/isSafeNumber');
 
 test('not a number type', function () {
     expect(isSafeNumber(NaN)).toBe(false);
